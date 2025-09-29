@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import { SWRConfig } from 'swr'
-import { Toaster } from 'react-hot-toast'
-import { DndContext } from '@dnd-kit/core'
-import { AuthProvider, useAuth } from './contexts/AuthContext'
-import { ThemeProvider } from './components/ThemeProvider'
-import LoginPage from './pages/LoginPage'
-import Dashboard from './pages/Dashboard'
-import { fetcher } from './lib/api'
-
+import { useState } from "react";
+import { SWRConfig } from "swr";
+import { Toaster } from "react-hot-toast";
+import { DndContext } from "@dnd-kit/core";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { ThemeProvider } from "./components/ThemeProvider";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import { fetcher } from "./lib/api";
 
 function AppContent() {
   // Всегда показываем Dashboard, игнорируем авторизацию
-  return <Dashboard />
+  return <Dashboard />;
 }
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
         </SWRConfig>
       </DndContext>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
