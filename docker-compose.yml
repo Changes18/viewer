@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=sqlite:/app/database/production.db
+      - JWT_SECRET=${JWT_SECRET}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - FRONTEND_URL=http://frontend
+    volumes:
+      - ./uploads:/app/uploads
+      - ./database:/app/database
+    restart: unless-stopped
+    networks:
+      - student-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile  
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - student-network
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - BOT_TOKEN=${BOT_TOKEN}
+      - API_BASE_URL=http://backend:3001
+    depends_on:
+      - backend
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - student-network
+
+networks:
+  student-network:
+    driver: bridge
+
+volumes:
+  uploads:
+  database:

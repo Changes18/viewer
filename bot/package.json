@@ -1,0 +1,24 @@
+{
+  "name": "student-analysis-bot",
+  "version": "1.0.0",
+  "description": "Telegram бот для анализа студенческих работ",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "keywords": ["telegram", "bot", "education", "ocr", "ai"],
+  "author": "Student Analysis Team",
+  "license": "MIT",  "dependencies": {
+    "telegraf": "^4.16.3",
+    "axios": "^1.7.7",
+    "form-data": "^4.0.0",
+    "tesseract.js": "^5.1.0",
+    "qrcode": "^1.5.3",
+    "dotenv": "^16.4.5",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
