@@ -1,3 +1,7 @@
+console.log('=== Backend server started. Allowed origins:', [
+    'http://localhost:5173',
+    'https://viewer-plum-alpha.vercel.app'
+]);
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -17,8 +21,20 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://viewer-plum-alpha.vercel.app'
+];
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: function(origin, callback) {
+        // allow requests with no origin (like mobile apps, curl, etc)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 app.use(morgan('combined'));
@@ -27,7 +43,10 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Static files для загруженных изображений с CORS заголовками
 app.use('/uploads', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'http://localhost:5173');
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Methods', 'GET');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
