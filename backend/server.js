@@ -22,8 +22,11 @@ app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://viewer-plum-alpha.vercel.app'
+    'http://localhost:5173',
+    'https://viewer-plum-alpha.vercel.app',
+    'https://viewer-eoqhy1aps-changes18s-projects.vercel.app',
+    'https://viewer-jszv-g3pg5ukp4-changes18s-projects.vercel.app',
+    'https://viewer-jszv.vercel.app'
 ];
 app.use(cors({
     origin: function(origin, callback) {
