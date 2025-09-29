@@ -8,13 +8,9 @@ import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import { fetcher } from './lib/api'
 
+
 function AppContent() {
-  const { isAuthenticated } = useAuth()
-  
-  if (!isAuthenticated) {
-    return <LoginPage />
-  }
-  
+  // Всегда показываем Dashboard, игнорируем авторизацию
   return <Dashboard />
 }
 
