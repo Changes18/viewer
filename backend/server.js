@@ -26,7 +26,9 @@ const allowedOrigins = [
     'https://viewer-plum-alpha.vercel.app',
     'https://viewer-eoqhy1aps-changes18s-projects.vercel.app',
     'https://viewer-jszv-g3pg5ukp4-changes18s-projects.vercel.app',
-    'https://viewer-jszv.vercel.app'
+        'https://viewer-jszv.vercel.app',
+        'https://viewer-nbywjxpbk-changes18s-projects.vercel.app',
+        'https://viewer-wine-five.vercel.app'
 ];
 app.use(cors({
     origin: function(origin, callback) {
